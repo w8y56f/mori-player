@@ -1,0 +1,169 @@
+// !$*UTF8*$!
+{
+    archiveVersion = 1;
+    classes = {};
+    objectVersion = 77;
+    objects = {
+        A00000000000000000000001 = {
+            isa = PBXProject;
+            attributes = {
+                BuildIndependentTargetsInParallel = YES;
+                LastSwiftUpdateCheck = 2660;
+                LastUpgradeCheck = 2660;
+                TargetAttributes = {
+                    A00000000000000000000002 = { CreatedOnToolsVersion = 26.6; };
+                };
+            };
+            buildConfigurationList = A00000000000000000000003;
+            compatibilityVersion = "Xcode 16.0";
+            developmentRegion = en;
+            hasScannedForEncodings = 0;
+            knownRegions = (en, Base, "zh-Hans");
+            mainGroup = A00000000000000000000004;
+            preferredProjectObjectVersion = 77;
+            productRefGroup = A00000000000000000000005;
+            projectDirPath = "";
+            projectRoot = "";
+            targets = (A00000000000000000000002);
+        };
+        A00000000000000000000002 = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = A00000000000000000000006;
+            buildPhases = (A00000000000000000000007, A00000000000000000000008, A00000000000000000000009);
+            buildRules = ();
+            dependencies = ();
+            fileSystemSynchronizedGroups = (A0000000000000000000000A);
+            name = MoriPlayer;
+            packageProductDependencies = ();
+            productName = MoriPlayer;
+            productReference = A0000000000000000000000B;
+            productType = "com.apple.product-type.application";
+        };
+        A00000000000000000000004 = {
+            isa = PBXGroup;
+            children = (A0000000000000000000000A, A00000000000000000000005);
+            sourceTree = "<group>";
+        };
+        A00000000000000000000005 = {
+            isa = PBXGroup;
+            children = (A0000000000000000000000B);
+            name = Products;
+            sourceTree = "<group>";
+        };
+        A0000000000000000000000A = {
+            isa = PBXFileSystemSynchronizedRootGroup;
+            path = MoriPlayer;
+            sourceTree = "<group>";
+        };
+        A0000000000000000000000B = {
+            isa = PBXFileReference;
+            explicitFileType = wrapper.application;
+            includeInIndex = 0;
+            path = "Mori Player.app";
+            sourceTree = BUILT_PRODUCTS_DIR;
+        };
+        A00000000000000000000007 = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A00000000000000000000008 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A00000000000000000000009 = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A00000000000000000000003 = {
+            isa = XCConfigurationList;
+            buildConfigurations = (A0000000000000000000000C, A0000000000000000000000D);
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Release;
+        };
+        A00000000000000000000006 = {
+            isa = XCConfigurationList;
+            buildConfigurations = (A0000000000000000000000E, A0000000000000000000000F);
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Release;
+        };
+        A0000000000000000000000C = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                CLANG_ENABLE_MODULES = YES;
+                CLANG_ENABLE_OBJC_ARC = YES;
+                GCC_C_LANGUAGE_STANDARD = gnu17;
+                MACOSX_DEPLOYMENT_TARGET = 14.0;
+                SDKROOT = macosx;
+                DEBUG_INFORMATION_FORMAT = dwarf;
+                ENABLE_TESTABILITY = YES;
+                GCC_OPTIMIZATION_LEVEL = 0;
+                ONLY_ACTIVE_ARCH = YES;
+                SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+                SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+            };
+            name = Debug;
+        };
+        A0000000000000000000000D = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                CLANG_ENABLE_MODULES = YES;
+                CLANG_ENABLE_OBJC_ARC = YES;
+                GCC_C_LANGUAGE_STANDARD = gnu17;
+                MACOSX_DEPLOYMENT_TARGET = 14.0;
+                SDKROOT = macosx;
+                DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+                SWIFT_COMPILATION_MODE = wholemodule;
+                SWIFT_OPTIMIZATION_LEVEL = "-O";
+            };
+            name = Release;
+        };
+        A0000000000000000000000E = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+                ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+                CODE_SIGN_STYLE = Automatic;
+                CODE_SIGN_IDENTITY = "-";
+                COMBINE_HIDPI_IMAGES = YES;
+                CURRENT_PROJECT_VERSION = 1;
+                ENABLE_APP_SANDBOX = YES;
+                ENABLE_USER_SELECTED_FILES = readonly;
+                ENABLE_HARDENED_RUNTIME = YES;
+                ENABLE_PREVIEWS = YES;
+                GENERATE_INFOPLIST_FILE = YES;
+                INFOPLIST_KEY_CFBundleDisplayName = "Mori Player";
+                INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+                LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
+                MARKETING_VERSION = 0.1.0;
+                PRODUCT_BUNDLE_IDENTIFIER = "com.example.MoriPlayer";
+                PRODUCT_NAME = "Mori Player";
+                PRODUCT_MODULE_NAME = MoriPlayer;
+                REGISTER_APP_GROUPS = NO;
+                SWIFT_EMIT_LOC_STRINGS = YES;
+                SWIFT_STRICT_CONCURRENCY = complete;
+                SWIFT_VERSION = 6.0;
+            };
+            name = Debug;
+        };
+        A0000000000000000000000F = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+                ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+                CODE_SIGN_STYLE = Automatic;
+                CODE_SIGN_IDENTITY = "-";
+                COMBINE_HIDPI_IMAGES = YES;
+                CURRENT_PROJECT_VERSION = 1;
+                ENABLE_APP_SANDBOX = YES;
+                ENABLE_USER_SELECTED_FILES = readonly;
+                ENABLE_HARDENED_RUNTIME = YES;
+                ENABLE_PREVIEWS = YES;
+                GENERATE_INFOPLIST_FILE = YES;
+                INFOPLIST_KEY_CFBundleDisplayName = "Mori Player";
+                INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+                LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
+                MARKETING_VERSION = 0.1.0;
+                PRODUCT_BUNDLE_IDENTIFIER = "com.example.MoriPlayer";
+                PRODUCT_NAME = "Mori Player";
+                PRODUCT_MODULE_NAME = MoriPlayer;
+                REGISTER_APP_GROUPS = NO;
+                SWIFT_EMIT_LOC_STRINGS = YES;
+                SWIFT_STRICT_CONCURRENCY = complete;
+                SWIFT_VERSION = 6.0;
+            };
+            name = Release;
+        };
+    };
+    rootObject = A00000000000000000000001;
+}
