@@ -18,7 +18,10 @@ struct PlayerSmokeTests {
             try file.write(from: buffer)
         }
 
-        let model = PlayerModel()
+        let suiteName = "MoriPlayer.SmokeTests.\(UUID().uuidString)"
+        let preferences = UserDefaults(suiteName: suiteName)!
+        defer { preferences.removePersistentDomain(forName: suiteName) }
+        let model = PlayerModel(preferences: preferences)
         model.open(fixture)
         try await wait { !model.isLoading }
         precondition(model.errorMessage == nil && model.canPlay)
@@ -62,13 +65,18 @@ struct PlayerSmokeTests {
         precondition(PlayerModel.time(.nan) == "00:00")
         let invalid = directory.appendingPathComponent("invalid-media.wav")
         try Data("invalid".utf8).write(to: invalid)
+        model.changeSpeed(by: 0.25)
+        precondition(model.isSpeedVisible)
         model.open(invalid)
+        precondition(!model.isSpeedVisible, "Replacing a file must dismiss an old speed hint")
         try await wait { !model.isLoading }
         precondition(model.errorMessage != nil && !model.canPlay)
+        let previousVolume = model.volume
         model.open(invalid)
         model.open(fixture)
         try await wait { !model.isLoading }
         precondition(model.errorMessage == nil && model.canPlay)
+        precondition(model.volume == previousVolume, "Replacing media in a window must keep its current volume")
         model.stop()
         print("PASS: real media loading, playback, pause, ±5-second seeks, stop, volume/speed limits, end/replay, invalid media, rapid replacement, time formatting.")
     }
