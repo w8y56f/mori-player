@@ -98,7 +98,7 @@ def package(args):
         raise SystemExit("Build version or clean Git metadata does not match the release source.")
     run("codesign", "--verify", "--deep", "--strict", str(app), capture=False)
     for binary in [app / "Contents/MacOS/Mori Player", app / "Contents/Frameworks/VLCKit.framework/VLCKit"]:
-        run("lipo", "-verify_arch", "arm64", "x86_64", str(binary))
+        run("lipo", str(binary), "-verify_arch", "arm64", "x86_64")
     for resource in ["en.lproj/Localizable.strings", "zh-Hans.lproj/Localizable.strings", "VLCKit-LICENSE.txt"]:
         if not (app / "Contents/Resources" / resource).is_file():
             raise SystemExit(f"Missing resource: {resource}")
