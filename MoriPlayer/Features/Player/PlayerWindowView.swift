@@ -54,7 +54,8 @@ struct PlayerWindowView: View {
             }
             if model.isLoading { ProgressView(L("正在载入…")).padding(24).background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12)) }
             if model.canPlay {
-                SubtitleFeedbackOverlay(subtitles: model.subtitles, playbackSymbol: model.playbackHint?.rawValue, seekText: model.seekHint)
+                SubtitleFeedbackOverlay(subtitles: model.subtitles, playbackSymbol: model.playbackHint?.rawValue,
+                    seekText: model.seekHint, volumePercent: model.volumeHint)
                     .onReceive(model.subtitles.$feedback) { if $0 != nil { model.clearCentralHints() } }
             }
             if model.canPlay && model.isSpeedVisible {

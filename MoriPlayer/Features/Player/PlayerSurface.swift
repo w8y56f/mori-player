@@ -244,7 +244,7 @@ final class PlaybackSurface: NSView {
 
     override func scrollWheel(with event: NSEvent) {
         guard event.phase != .ended, event.momentumPhase == [] else { return }
-        let reverse = UserDefaults.standard.object(forKey: "reverseVolumeScroll") as? Bool ?? true
+        let reverse = UserDefaults.standard.object(forKey: "reverseVolumeScroll") as? Bool ?? false
         model?.changeVolume(by: Self.volumeChange(delta: event.scrollingDeltaY,
             invertedBySystem: event.isDirectionInvertedFromDevice,
             precise: event.hasPreciseScrollingDeltas, reverse: reverse))

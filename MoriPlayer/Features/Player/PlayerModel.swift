@@ -7,8 +7,14 @@ import UniformTypeIdentifiers
 final class PlayerModel: ObservableObject {
     @Published private(set) var seekHint: String?
     private var seekHintTask: Task<Void, Never>?
+    @Published private(set) var volumeHint: Int?
+    private var volumeHintTask: Task<Void, Never>?
     var seekStep: Int { let n = preferences.integer(forKey: "seekStepSeconds"); return (1...60).contains(n) ? n : 5 }
-    func clearCentralHints() { hidePlaybackHint(); seekHintTask?.cancel(); seekHint = nil }
+    func clearCentralHints() {
+        hidePlaybackHint()
+        seekHintTask?.cancel(); seekHint = nil
+        volumeHintTask?.cancel(); volumeHint = nil
+    }
     func skip(forward: Bool) {
         guard canPlay, player.isSeekable else { return }
         let delta = Double(seekStep) * (forward ? 1 : -1)
@@ -60,6 +66,7 @@ final class PlayerModel: ObservableObject {
             let bounded = volume.isFinite ? min(max(volume, 0), 1) : VolumePreferences.defaultVolume
             if volume != bounded { volume = bounded }
             player.audio?.volume = Int32((bounded * 100).rounded())
+            if bounded != oldValue { showVolumeHint(bounded) }
             if bounded != oldValue, InitialVolumeMode.read(from: preferences) == .remember {
                 preferences.set(bounded, forKey: VolumePreferences.lastVolumeKey)
             }
@@ -122,6 +129,7 @@ final class PlayerModel: ObservableObject {
         speedHintTask?.cancel()
         controlsHideTask?.cancel()
         playbackHintTask?.cancel()
+        volumeHintTask?.cancel()
         scopedURL?.stopAccessingSecurityScopedResource()
     }
 
@@ -284,6 +292,18 @@ final class PlayerModel: ObservableObject {
     }
 
     func changeVolume(by delta: Double) { volume = min(max(volume + delta, 0), 1) }
+
+    private func showVolumeHint(_ value: Double) {
+        hidePlaybackHint()
+        seekHintTask?.cancel(); seekHint = nil
+        subtitles.dismissFeedback()
+        volumeHintTask?.cancel()
+        volumeHint = Int((value * 100).rounded())
+        volumeHintTask = Task { [weak self] in
+            do { try await Task.sleep(for: .seconds(1)) } catch { return }
+            self?.volumeHint = nil
+        }
+    }
 
     func changeSpeed(by delta: Float) {
         speed = min(max(speed + delta, 0.25), 4)

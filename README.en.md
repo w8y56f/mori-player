@@ -6,7 +6,7 @@ A native macOS local media player built with Swift, SwiftUI, AppKit and embedded
 
 <img src="MoriPlayer/Resources/Assets.xcassets/AppMark.imageset/AppMark.png" width="128" alt="Mori Player forest and play icon" />
 
-Current version: **0.1.0**. Minimum system version: **macOS 14.0**.
+Current version: **0.9.0**. Minimum system version: **macOS 14.0**.
 
 ## Features
 
@@ -45,7 +45,7 @@ Open **Mori Player → Settings… (⌘,)**.
 | General → Initial window size | Fit to screen (default), remember last size, or original video size. Manual resizing is retained for subsequent videos in that window. |
 | General → Play | Seek step, playback position history and automatic subtitle loading. |
 | General → Initial volume | Remember the last level, including mute; first-use volume is 70%. Alternatively use a fixed initial value. New windows use it; existing windows remain independent. |
-| General → Mouse controls | The first click on an inactive video only activates the window by default; the next click plays/pauses. Wheel direction can be reversed. |
+| General → Mouse controls | The first click on an inactive video only activates the window by default; the next click plays/pauses. Volume-wheel reversal is off by default and can be enabled here. |
 | Appearance | Dark (default), Light, System. Video and letterboxing retain their original appearance. |
 | Shortcuts & Controls | Operation reference, including the configured seek interval. |
 | About | App version, build-time Git identity and Powered by Stone Wang. The app menu’s About command opens this same page. |
@@ -61,7 +61,7 @@ Shortcuts apply to the current player window. `⌘` means Command; `⌃` means C
 | Play / pause | `Space` | Click the video or play button |
 | Seek backward / forward | `←` / `→` | Control-bar buttons; uses the configured step |
 | Stop and return to start | — | Stop button |
-| Volume | `↑` / `↓`, 5% per press | Slider; wheel defaults to up decreasing and down increasing, with reversal available |
+| Volume | `↑` / `↓`, 5% per press | Slider; wheel defaults to up increasing and down decreasing, with reversal available; changes show a centered percentage |
 | Speed up / slow down | `A` / `S`, 0.25× per press | — |
 | Seek to a time | — | Click or drag the seek bar |
 | Toggle full screen | `⌃⌘F`; `Esc` to exit | Double-click the video or use the full-screen button |
@@ -107,7 +107,7 @@ The project currently uses local ad hoc signing. Configure developer signing, no
 
 ## Version and persistence
 
-An About example is `0.1.0 (abc1234 - dirty)`. The parentheses contain the build-time short Git commit ID; `dirty` denotes uncommitted changes. Rebuild after a clean commit to display `0.1.0 (abc1234)`. Unavailable Git metadata appears as `unknown`.
+An About example is `0.9.0 (abc1234 - dirty)`. The parentheses contain the build-time short Git commit ID; `dirty` denotes uncommitted changes. Rebuild after a clean commit to display `0.9.0 (abc1234)`. Unavailable Git metadata appears as `unknown`.
 
 The build script generates and embeds `BuildMetadata.json` without rewriting tracked source. Git is not required at runtime. A commit requires a new build to update the displayed identity; an already running process keeps its original metadata.
 

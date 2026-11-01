@@ -68,7 +68,7 @@
 "点击或拖动进度条" = "Click or drag the seek bar";
 "操作时在滑块上方显示目标时间" = "The target time appears above the thumb while seeking.";
 "增大 / 减小音量" = "Increase / decrease volume";
-"方向键每次调整 5%；滚轮方向可在 General 中设置，默认向上减小、向下增大" = "Arrow keys adjust by 5%. Set wheel direction in General; by default, scroll up decreases and down increases volume.";
+"方向键每次调整 5%；滚轮方向可在 General 中设置，默认向上减小、向下增大" = "Arrow keys adjust by 5%. Set wheel direction in General; by default, scroll up increases and down decreases volume.";
 "播放速度" = "Playback speed";
 "加速 0.25×" = "Speed up by 0.25×";
 "减速 0.25×" = "Slow down by 0.25×";

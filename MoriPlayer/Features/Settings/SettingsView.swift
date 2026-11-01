@@ -7,7 +7,7 @@ struct SettingsView: View {
     @AppStorage("autoLoadSubtitles") private var autoLoadSubtitles = true
     @AppStorage("activateOnFirstClick") private var activateOnFirstClick = true
     @AppStorage("rememberPlaybackPosition") private var rememberPlaybackPosition = true
-    @AppStorage("reverseVolumeScroll") private var reverseVolumeScroll = true
+    @AppStorage("reverseVolumeScroll") private var reverseVolumeScroll = false
     @AppStorage("allowMultipleWindows") private var allowMultipleWindows = false
     @AppStorage("quitOnLastPlayerClose") private var quitOnLastPlayerClose = true
     @AppStorage("initialWindowSizeMode") private var initialWindowSizeMode: InitialWindowSizeMode = .smart

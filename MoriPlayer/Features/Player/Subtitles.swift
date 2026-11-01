@@ -330,6 +330,7 @@ struct SubtitleFeedbackOverlay: View {
     @ObservedObject var subtitles: SubtitleController
     let playbackSymbol: String?
     var seekText: String? = nil
+    var volumePercent: Int? = nil
     var body: some View {
         Group {
             if let feedback = subtitles.feedback {
@@ -345,6 +346,12 @@ struct SubtitleFeedbackOverlay: View {
                 .id(feedback.id).transition(.opacity)
             } else if let seekText {
                 Text(seekText).font(.system(size: 22, weight: .medium))
+                    .foregroundStyle(.white).padding(20)
+                    .background(.black.opacity(0.7), in: RoundedRectangle(cornerRadius: 16))
+            } else if let volumePercent {
+                Label(L("音量") + " \(volumePercent)%",
+                      systemImage: volumePercent == 0 ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                    .font(.system(size: 22, weight: .medium))
                     .foregroundStyle(.white).padding(20)
                     .background(.black.opacity(0.7), in: RoundedRectangle(cornerRadius: 16))
             } else if let playbackSymbol {
