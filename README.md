@@ -157,3 +157,11 @@ Tests/                       独立 Swift/Python 回归检查
 ```
 
 目前以本地文件播放为主，尚未提供播放列表、网络串流界面或字幕编辑器。图片字幕及已经压入画面的文字不支持文字字号调整。
+
+## GitHub Release 发布
+
+项目级发布技能见 [mori-release](.agents/skills/mori-release/SKILL.md)。在 Codex 中可明确调用 `$mori-release`，例如“使用 $mori-release 将当前版本发布到 GitHub Release”。技能先显示 Git 工作区及上游同步状态；有未提交改动时询问提交并推送，只有未推送提交时询问推送，完成后再打包发布。
+
+`python3 Scripts/Release.py status` 只检查本地状态。`package` 要求干净且已推送的提交，构建 universal arm64/x86_64 Release 并生成 `.build/releases/v<版本>/MoriPlayer-<版本>-macOS.dmg`、`SHA256SUMS.txt` 及本地清单。DMG 中包含应用、Applications 快捷方式和安装说明。
+
+`publish --notes <中英文说明文件>` 按版本创建 GitHub Release，上传 DMG 和校验文件，已有版本不覆盖。当前 ad hoc 构建必须明确使用 `--allow-unnotarized`，并作为未公证预发布提供；正式公证构建需在 `package` 时传入现有 Developer ID、Team ID 和钥匙串 notarytool 配置。凭据不存入仓库。创建 skill 不会自动提交、推送或发布。

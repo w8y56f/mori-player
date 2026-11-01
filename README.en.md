@@ -157,3 +157,11 @@ Tests/                       Standalone Swift/Python regression checks
 ```
 
 The current focus is local playback. A playlist, network streaming UI and subtitle editor are not implemented. Bitmap subtitles and text burned into video do not support text font-size adjustment.
+
+## GitHub Releases
+
+The project release skill is [mori-release](.agents/skills/mori-release/SKILL.md). Invoke `$mori-release` in Codex to publish the current version. It first reports worktree and upstream synchronization state, asks to commit and push outstanding changes or push unpushed commits, then packages and publishes.
+
+`python3 Scripts/Release.py status` only inspects local Git state. `package` requires clean, pushed source, builds a universal arm64/x86_64 Release, and writes a DMG, `SHA256SUMS.txt` and local manifest under `.build/releases/v<version>/`. The DMG includes the app, an Applications shortcut and installation instructions.
+
+`publish --notes <bilingual-notes-file>` creates the versioned GitHub Release and uploads the DMG and checksums without overwriting existing versions. Ad hoc packages require `--allow-unnotarized` and are published as unnotarized prereleases. Notarized builds require an existing Developer ID, Team ID and notarytool Keychain profile when running `package`. Credentials are not stored in the repository. Creating the skill does not itself commit, push or publish.
