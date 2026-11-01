@@ -171,7 +171,7 @@
                 INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
                 LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
                 MARKETING_VERSION = 0.1.0;
-                PRODUCT_BUNDLE_IDENTIFIER = "com.example.MoriPlayer";
+                PRODUCT_BUNDLE_IDENTIFIER = "com.stone.mori-player";
                 PRODUCT_NAME = "Mori Player";
                 PRODUCT_MODULE_NAME = MoriPlayer;
                 REGISTER_APP_GROUPS = NO;
@@ -203,7 +203,7 @@
                 INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
                 LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
                 MARKETING_VERSION = 0.1.0;
-                PRODUCT_BUNDLE_IDENTIFIER = "com.example.MoriPlayer";
+                PRODUCT_BUNDLE_IDENTIFIER = "com.stone.mori-player";
                 PRODUCT_NAME = "Mori Player";
                 PRODUCT_MODULE_NAME = MoriPlayer;
                 REGISTER_APP_GROUPS = NO;

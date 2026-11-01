@@ -21,7 +21,7 @@ are local until refreshed. Run `git fetch origin`, then report the refreshed sta
   requested release workflow. If this invocation already explicitly authorizes the exact
   commits/push, proceed without asking again.
 - If behind or diverged, inspect and explain the difference; resolve it within the user's
-  authorized scope. Do not force-push, reset, or move a release tag.
+  authorized scope. Do not force-push or reset branches. Move a release tag only for an explicitly authorized replacement.
 - After the authorized commit/push, verify clean HEAD equals the GitHub branch. Stop on
   authentication or permission failures; report the concrete command/error.
 
@@ -81,3 +81,14 @@ and compare its SHA-256. On partial upload/failure, inspect the existing release
 retrying. Do not delete/recreate an existing release or use upload clobber implicitly.
 
 Report the release URL, tag/commit, signing/notarization state and checks performed.
+
+## Explicit replacement
+
+When the user explicitly asks to replace an existing release, keep its version and URL.
+Use `package --replace-existing`; the previous local package is archived automatically.
+After checking the new DMG, upload the two assets with `gh release upload --clobber`,
+update `refs/tags/vVERSION` through the GitHub Git refs API to the exact new commit,
+and update the existing release's bilingual notes with `gh release edit`.
+This path is only for explicit replacement authorization, never the default retry path.
+Verify the remote tag and redownloaded checksum just as for a new release. Include any
+Bundle Identifier change and its settings/history implications in the notes.

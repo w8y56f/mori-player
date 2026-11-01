@@ -8,6 +8,7 @@ import plistlib
 import re
 import subprocess
 import tempfile
+from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = "w8y56f/mori-player"
@@ -78,11 +79,16 @@ def package(args):
     tag = "v" + v
     existing = subprocess.run(["gh", "release", "view", tag, "--repo", REPOSITORY], cwd=ROOT,
                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    if existing.returncode == 0:
+    if existing.returncode == 0 and not args.replace_existing:
         raise SystemExit("This version already has a release. Do not overwrite it.")
     out = ROOT / ".build/releases" / tag
     if out.exists():
-        raise SystemExit(f"Output already exists; inspect it before retrying: {out}")
+        if not args.replace_existing:
+            raise SystemExit(f"Output already exists; inspect it before retrying: {out}")
+        backup = out.parent / "backups" / (tag + "-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
+        backup.parent.mkdir(parents=True, exist_ok=True)
+        out.rename(backup)
+        print(f"Previous local package preserved at {backup}", flush=True)
     run("sh", "Scripts/PrepareDependencies.sh", capture=False)
     command = ["xcodebuild", "-project", "MoriPlayer.xcodeproj", "-scheme", "MoriPlayer",
                "-configuration", "Release", "-derivedDataPath", ".build/DerivedData",
@@ -161,6 +167,7 @@ if __name__ == "__main__":
     sub.add_parser("status")
     pack = sub.add_parser("package")
     pack.add_argument("--version")
+    pack.add_argument("--replace-existing", action="store_true", help="Use only when replacement of this release was explicitly requested; archives previous local output")
     pack.add_argument("--identity")
     pack.add_argument("--team")
     pack.add_argument("--notary-profile")
