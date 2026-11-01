@@ -81,14 +81,24 @@
 sh Scripts/PrepareDependencies.sh
 ```
 
-日常交付统一使用以下 **Release** 路径：
+日常开发与功能验收使用 **Debug 开发版**，与安装的正式版隔离：
+
+```sh
+xcodebuild -project MoriPlayer.xcodeproj -scheme MoriPlayer \
+  -configuration Debug -derivedDataPath .build/DerivedData build
+open ".build/DerivedData/Build/Products/Debug/Mori Player Dev.app"
+```
+
+Debug 名称为 Mori Player Dev，标识为 `com.stone.mori-player.dev`；Release 名称为 Mori Player，标识为 `com.stone.mori-player`。两者的偏好设置、播放记录和沙盒分开，不自动迁移。日常可并存运行；本地 Release 与安装版仍同标识，只用于发布前最终验收。不要继续使用旧的 `.build/DerivedData/Build/Products/Release/Mori Player.app` 路径。
+
+发布前的 **Release** 检查使用独立构建目录（先退出已安装的正式版）：
 
 ```sh
 xcodebuild -project MoriPlayer.xcodeproj \
   -scheme MoriPlayer -configuration Release \
-  -derivedDataPath .build/DerivedData build
+  -derivedDataPath .build/ReleaseDerivedData build
 
-open ".build/DerivedData/Build/Products/Release/Mori Player.app"
+open ".build/ReleaseDerivedData/Build/Products/Release/Mori Player.app"
 ```
 
 也可在准备依赖后打开 `MoriPlayer.xcodeproj`，选择 `MoriPlayer` scheme 和 My Mac，按 `⌘R` 开发调试。Debug 与 Release 是独立产物，构建其中一个不会更新另一个；打开新版前应完全退出旧进程。
@@ -136,7 +146,7 @@ done
 python3 Tests/BuildMetadataTests.py
 swiftc -swift-version 6 -parse-as-library \
   MoriPlayer/App/Language.swift Tests/LanguageTests.swift -o .build/language-tests
-.build/language-tests ".build/DerivedData/Build/Products/Release/Mori Player.app/Contents/Resources"
+.build/language-tests ".build/ReleaseDerivedData/Build/Products/Release/Mori Player.app/Contents/Resources"
 ```
 
 `Tests/` 还包含窗口、外观、历史记录等回归用例；部分早期 AVPlayer 专用用例尚未完成 VLC 适配，不应将其视为当前内核的验收依据。上面的命令只覆盖所列测试，不代表整个目录全部通过。

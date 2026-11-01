@@ -81,14 +81,24 @@ Prepare pinned **VLCKit 3.7.3** first. The script downloads from VideoLAN, verif
 sh Scripts/PrepareDependencies.sh
 ```
 
-Use this consistent **Release** path for everyday builds:
+Use **Debug** for everyday development and feature acceptance:
+
+```sh
+xcodebuild -project MoriPlayer.xcodeproj -scheme MoriPlayer \
+  -configuration Debug -derivedDataPath .build/DerivedData build
+open ".build/DerivedData/Build/Products/Debug/Mori Player Dev.app"
+```
+
+Debug is named Mori Player Dev with identifier `com.stone.mori-player.dev`; Release remains Mori Player with `com.stone.mori-player`. Preferences, history and sandbox data are separate and not migrated automatically. Debug and installed Release can coexist. Local Release still shares the installed identity, so reserve it for final acceptance. Stop using the old `.build/DerivedData/Build/Products/Release/Mori Player.app` path.
+
+For final **Release** acceptance, use a separate build directory and first quit the installed production copy:
 
 ```sh
 xcodebuild -project MoriPlayer.xcodeproj \
   -scheme MoriPlayer -configuration Release \
-  -derivedDataPath .build/DerivedData build
+  -derivedDataPath .build/ReleaseDerivedData build
 
-open ".build/DerivedData/Build/Products/Release/Mori Player.app"
+open ".build/ReleaseDerivedData/Build/Products/Release/Mori Player.app"
 ```
 
 For debugging, prepare dependencies, open `MoriPlayer.xcodeproj`, select the `MoriPlayer` scheme and My Mac, then press `⌘R`. Debug and Release are separate products: building one does not update the other. Fully quit an old process before opening a new build.
@@ -136,7 +146,7 @@ Metadata and language checks:
 python3 Tests/BuildMetadataTests.py
 swiftc -swift-version 6 -parse-as-library \
   MoriPlayer/App/Language.swift Tests/LanguageTests.swift -o .build/language-tests
-.build/language-tests ".build/DerivedData/Build/Products/Release/Mori Player.app/Contents/Resources"
+.build/language-tests ".build/ReleaseDerivedData/Build/Products/Release/Mori Player.app/Contents/Resources"
 ```
 
 `Tests/` also contains window, appearance and history checks. Some older AVPlayer-specific cases still require VLC migration and are not evidence for the current engine. The commands above cover only the listed tests, not the entire directory.

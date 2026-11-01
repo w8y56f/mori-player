@@ -20,7 +20,7 @@ private struct PlayerCommands: Commands {
 
     var body: some Commands {
         CommandGroup(replacing: .appInfo) {
-            Button(L("关于") + " Mori Player") {
+            Button(L("关于") + " " + AppBuildInfo.read().name) {
                 SettingsNavigation.shared.showAbout()
                 openSettings()
             }

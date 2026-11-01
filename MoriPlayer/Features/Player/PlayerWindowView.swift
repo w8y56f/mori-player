@@ -41,7 +41,7 @@ struct PlayerWindowView: View {
                 VStack(spacing: 18) {
                     Image("AppMark")
                         .resizable().frame(width: 96, height: 96)
-                    Text("Mori Player")
+                    Text(AppBuildInfo.read().name)
                         .font(.system(size: 26, weight: .medium, design: .rounded))
                     Text(L("打开一段影像，让时间慢下来。"))
                         .foregroundStyle(.secondary)

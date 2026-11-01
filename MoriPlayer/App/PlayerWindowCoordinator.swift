@@ -163,7 +163,7 @@ final class PlayerWindowController: NSWindowController, NSWindowDelegate {
                               styleMask: [.titled, .closable, .miniaturizable, .resizable],
                               backing: .buffered, defer: false)
         super.init(window: window)
-        window.title = "Mori Player"
+        window.title = AppBuildInfo.read().name
         window.identifier = NSUserInterfaceItemIdentifier("player.\(id.uuidString)")
         window.contentMinSize = NSSize(width: 800, height: 400)
         window.collectionBehavior.insert(.fullScreenPrimary)
@@ -182,7 +182,7 @@ final class PlayerWindowController: NSWindowController, NSWindowDelegate {
         configureInitialSize(on: initialScreen)
         updateAppearance()
         player.$fileName.sink { [weak self, weak window] name in
-            window?.title = name ?? "Mori Player"
+            window?.title = name ?? AppBuildInfo.read().name
             if name != nil {
                 self?.pendingMode = InitialWindowSizeMode.read(from: preferences)
                 self?.handledMediaID = nil

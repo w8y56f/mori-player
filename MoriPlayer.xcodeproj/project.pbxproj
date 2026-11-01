@@ -167,12 +167,12 @@
                 ENABLE_PREVIEWS = YES;
                 GENERATE_INFOPLIST_FILE = YES;
                 INFOPLIST_FILE = Config/Info.plist;
-                INFOPLIST_KEY_CFBundleDisplayName = "Mori Player";
+                INFOPLIST_KEY_CFBundleDisplayName = "Mori Player Dev";
                 INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
                 LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
                 MARKETING_VERSION = 0.1.0;
-                PRODUCT_BUNDLE_IDENTIFIER = "com.stone.mori-player";
-                PRODUCT_NAME = "Mori Player";
+                PRODUCT_BUNDLE_IDENTIFIER = "com.stone.mori-player.dev";
+                PRODUCT_NAME = "Mori Player Dev";
                 PRODUCT_MODULE_NAME = MoriPlayer;
                 REGISTER_APP_GROUPS = NO;
                 SWIFT_EMIT_LOC_STRINGS = YES;

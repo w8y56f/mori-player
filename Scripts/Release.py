@@ -91,14 +91,16 @@ def package(args):
         print(f"Previous local package preserved at {backup}", flush=True)
     run("sh", "Scripts/PrepareDependencies.sh", capture=False)
     command = ["xcodebuild", "-project", "MoriPlayer.xcodeproj", "-scheme", "MoriPlayer",
-               "-configuration", "Release", "-derivedDataPath", ".build/DerivedData",
+               "-configuration", "Release", "-derivedDataPath", ".build/ReleaseDerivedData",
                "ARCHS=arm64 x86_64", "ONLY_ACTIVE_ARCH=NO", "CODE_SIGN_INJECT_BASE_ENTITLEMENTS=NO"]
     if args.identity:
         command += [f"CODE_SIGN_IDENTITY={args.identity}", f"DEVELOPMENT_TEAM={args.team}",
                     "CODE_SIGN_STYLE=Manual", "OTHER_CODE_SIGN_FLAGS=--timestamp"]
     run(*command, "build", capture=False)
-    app = ROOT / ".build/DerivedData/Build/Products/Release/Mori Player.app"
+    app = ROOT / ".build/ReleaseDerivedData/Build/Products/Release/Mori Player.app"
     info = plistlib.loads((app / "Contents/Info.plist").read_bytes())
+    if info["CFBundleIdentifier"] != "com.stone.mori-player":
+        raise SystemExit("Release must use the production Bundle Identifier.")
     metadata = json.loads((app / "Contents/Resources/BuildMetadata.json").read_text())
     if info["CFBundleShortVersionString"] != v or metadata != {"commit": state["commit"][:7], "dirty": False}:
         raise SystemExit("Build version or clean Git metadata does not match the release source.")

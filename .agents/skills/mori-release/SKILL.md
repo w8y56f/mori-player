@@ -37,7 +37,7 @@ checks and playback/subtitle regressions when the change warrants them. Do not c
 legacy AVPlayer test suite is fully migrated. Do not commit personal video fixtures.
 
 Use `python3 Scripts/Release.py package` to build the clean, pushed source. It builds a
-universal arm64/x86_64 Release in `.build/DerivedData`, checks version/Git metadata,
+universal arm64/x86_64 Release in `.build/ReleaseDerivedData`, checks version/Git metadata,
 frameworks, resources and signature, and makes a compressed DMG containing the app,
 an Applications shortcut and installation instructions. Artifacts go to
 `.build/releases/v<version>/`: DMG, SHA256SUMS.txt and local release.json manifest.
@@ -92,3 +92,13 @@ and update the existing release's bilingual notes with `gh release edit`.
 This path is only for explicit replacement authorization, never the default retry path.
 Verify the remote tag and redownloaded checksum just as for a new release. Include any
 Bundle Identifier change and its settings/history implications in the notes.
+
+## Development isolation
+
+Daily development/acceptance uses Debug: `Mori Player Dev.app`, identifier
+`com.stone.mori-player.dev`, under `.build/DerivedData/Build/Products/Debug`.
+Release keeps `com.stone.mori-player` and is built separately under
+`.build/ReleaseDerivedData`. Do not direct daily acceptance to a local Release app.
+A local Release and an installed Release still share their identity; quit the installed
+copy before explicitly testing the local Release. Do not change the production identity
+or migrate user data as part of development setup.
